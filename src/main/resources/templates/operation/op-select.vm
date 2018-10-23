@@ -1,0 +1,6 @@
+	/**
+	 *  Query DB table <tt>$table.name</tt> for records.
+	 *
+#parse("templates/operation/op-javadoc.vm")
+	 */	 
+#parse("templates/operation/op-signature.vm")

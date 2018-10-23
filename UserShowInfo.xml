@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.UserShowInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="UserShowInfo">
+        <id column="id" property="id" />
+        <result column="target_id" property="targetId" />
+        <result column="user_id" property="userId" />
+        <result column="show_id" property="showId" />
+        <result column="show_avator" property="showAvator" />
+        <result column="show_sex" property="showSex" />
+        <result column="creator" property="creator" />
+        <result column="updater" property="updater" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="publish_flag" property="publishFlag" />
+        <result column="black_list" property="blackList" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, target_id AS targetId, user_id AS userId, show_id AS showId, show_avator AS showAvator, show_sex AS showSex, creator, updater, create_time AS createTime, update_time AS updateTime, publish_flag AS publishFlag, black_list AS blackList
+    </sql>
+
+
+
+		<select id="selectByUserId" resultType="UserShowInfo">
+			select * from user_show_info where id =#{id} and show_sex = #{showSex}
+		</select>
+		<select id="selectById" resultType="UserShowInfo">
+			select * from user_show_info where id =#{id} and show_sex = #{showSex}
+		</select>
+
+	<select id="selectList"  resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column_List" />
+	    from user_show_info
+	    <where>
+	    </where>
+	</select>
+	
+	<select id="selectByPrimaryKey"  resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column_List" />
+	    from user_show_info
+	    where id = #{id,jdbcType=VARCHAR}
+	</select>
+
+	<delete id="deleteByPrimaryKey">
+	    delete from user_show_info
+	    where id = #{id}
+	</delete>  
+
+  <insert id="insert" parameterType="UserShowInfo">
+    insert into user_show_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null"> id, </if>
+		<if test="targetId != null"> target_id, </if>
+		<if test="userId != null"> user_id, </if>
+		<if test="showId != null"> show_id, </if>
+		<if test="showAvator != null"> show_avator, </if>
+		<if test="showSex != null"> show_sex, </if>
+		<if test="creator != null"> creator, </if>
+		<if test="updater != null"> updater, </if>
+		<if test="createTime != null"> create_time, </if>
+		<if test="updateTime != null"> update_time, </if>
+		<if test="publishFlag != null"> publish_flag, </if>
+		<if test="blackList != null"> black_list, </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null"> #{id}, </if>
+		<if test="targetId != null"> #{targetId}, </if>
+		<if test="userId != null"> #{userId}, </if>
+		<if test="showId != null"> #{showId}, </if>
+		<if test="showAvator != null"> #{showAvator}, </if>
+		<if test="showSex != null"> #{showSex}, </if>
+		<if test="creator != null"> #{creator}, </if>
+		<if test="updater != null"> #{updater}, </if>
+		<if test="createTime != null"> #{createTime}, </if>
+		<if test="updateTime != null"> #{updateTime}, </if>
+		<if test="publishFlag != null"> #{publishFlag}, </if>
+		<if test="blackList != null"> #{blackList}, </if>
+    </trim>
+  </insert>		
+	
+	<update id="updateByPrimaryKey" parameterType="UserShowInfo">
+	    update user_show_info
+	    <set>
+			<if test="id != null"> id = #{id} </if>
+			<if test="targetId != null"> target_id = #{targetId} </if>
+			<if test="userId != null"> user_id = #{userId} </if>
+			<if test="showId != null"> show_id = #{showId} </if>
+			<if test="showAvator != null"> show_avator = #{showAvator} </if>
+			<if test="showSex != null"> show_sex = #{showSex} </if>
+			<if test="creator != null"> creator = #{creator} </if>
+			<if test="updater != null"> updater = #{updater} </if>
+			<if test="createTime != null"> create_time = #{createTime} </if>
+			<if test="updateTime != null"> update_time = #{updateTime} </if>
+			<if test="publishFlag != null"> publish_flag = #{publishFlag} </if>
+			<if test="blackList != null"> black_list = #{blackList} </if>
+	    </set>
+	    where id = #{id,jdbcType=VARCHAR}
+	</update>
+</mapper>

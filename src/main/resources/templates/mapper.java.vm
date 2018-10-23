@@ -1,0 +1,44 @@
+package ${package.Mapper};
+
+import ${package.Entity}.${entity};
+import ${superMapperClassPackage};
+import org.apache.ibatis.annotations.Param;
+
+
+/**
+ * <p>
+ * $!{table.comment} Mapper 接口
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${kotlin})
+interface ${table.mapperName} :${superMapperClass}<${entity}>
+#else
+public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
+#set($log=${cfg.map.log})
+    #foreach($operation in ${tableOpInfo.sqlOpInfos})
+       #* #if($log.print($foreach.count))
+        #end*#
+        #parse("templates/operation/op-${operation.templateSuffix}.vm");
+    #end
+    #*#foreach($operation in ${cfg.map.sqlCfg.tableConfigs.get(${table.name}).operations})
+    #if(!$operation.resultMap && !$operation.resultClass)
+    ${entity}
+    #elseif($operation.resultMap)
+    $operation.resultMap
+    #elseif($operation.resultClass)
+    $operation.resultClass
+    #end
+        ${operation.name}(
+        #foreach($param in $operation.sqlParser.params)
+            #if($velocityCount > 1)
+                    ,
+            #end
+                String $param
+        #end
+            );
+#end*#
+}
+#end

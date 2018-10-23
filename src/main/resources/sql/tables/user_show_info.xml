@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table sqlname="user_show_info">
+    <operation name="selectByUserId" >
+        <sql>
+            select * from user_show_info where id =? and show_sex = ?
+        </sql>
+    </operation>
+
+    <operation name="selectById" >
+        <sql>
+            select * from user_show_info where id =? and show_sex = ?
+        </sql>
+    </operation>
+
+</table>

@@ -1,0 +1,1 @@
+    public $operation.simpleReturnType ${operation.name}(#foreach ($param in $operation.params)#if($foreach.count > 1),#end@Param("${param.variableName}")${param.simpleJavaType} ${param.variableName} #end)
